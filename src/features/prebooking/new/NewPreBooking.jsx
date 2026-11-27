@@ -8,6 +8,7 @@ import ClientStep from './ClientStep.jsx';
 import RequestStep from './RequestStep.jsx';
 import PetsStep from './PetsStep.jsx';
 import { validateStep } from './validate.js';
+import { toClientRecord } from './clientRecord.js';
 import { slide } from '../../../lib/motion.js';
 
 const STEPS = [
@@ -19,7 +20,18 @@ const STEPS = [
 const EMPTY_FORM = {
   clientMode: 'existing',
   clientId: '',
-  newClient: { name: '', phone: '+971', email: '', address: '' },
+  newClient: {
+    name: '',
+    phoneCountry: 'AE',
+    phoneNumber: '',
+    email: '',
+    addressLine1: '',
+    addressLine2: '',
+    city: '',
+    region: '',
+    postalCode: '',
+    country: '',
+  },
   direction: 'Export',
   travelMode: '',
   prefs: '',
@@ -35,6 +47,9 @@ export default function NewPreBooking({ clients, onClose, onSave }) {
   const { Component } = STEPS[step - 1];
 
   const update = (changes) => setForm((f) => ({ ...f, ...changes }));
+
+  const save = () =>
+    onSave(form.clientMode === 'new' ? { ...form, newClient: toClientRecord(form.newClient) } : form);
 
   const next = () => {
     const found = validateStep(step, form);
@@ -68,7 +83,7 @@ export default function NewPreBooking({ clients, onClose, onSave }) {
           {step < STEPS.length ? (
             <Button key="next" primary onClick={next}>Next</Button>
           ) : (
-            <Button key="save" primary onClick={() => onSave(form)}>Save Pre-Booking</Button>
+            <Button key="save" primary onClick={save}>Save Pre-Booking</Button>
           )}
         </div>
       </div>

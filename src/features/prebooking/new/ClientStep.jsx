@@ -1,16 +1,10 @@
 import PillTabs from '../../../components/ui/PillTabs.jsx';
+import NewClientFields from './NewClientFields.jsx';
 import { Field, inputClass } from '../../../components/ui/Field.jsx';
 
 const CLIENT_MODES = [
   { value: 'existing', label: 'Existing client' },
   { value: 'new', label: 'New client' },
-];
-
-const NEW_CLIENT_FIELDS = [
-  ['name', 'Full name'],
-  ['phone', 'Phone with country code'],
-  ['email', 'Email'],
-  ['address', 'Address'],
 ];
 
 export default function ClientStep({ form, update, errors, clearErrors, clients }) {
@@ -42,15 +36,11 @@ export default function ClientStep({ form, update, errors, clearErrors, clients 
           </select>
         </Field>
       ) : (
-        NEW_CLIENT_FIELDS.map(([key, label]) => (
-          <Field key={key} label={label} error={errors[key]}>
-            <input
-              className={`${inputClass} mt-1`}
-              value={form.newClient[key]}
-              onChange={(e) => update({ newClient: { ...form.newClient, [key]: e.target.value } })}
-            />
-          </Field>
-        ))
+        <NewClientFields
+          values={form.newClient}
+          errors={errors}
+          onChange={(changes) => update({ newClient: { ...form.newClient, ...changes } })}
+        />
       )}
     </>
   );
