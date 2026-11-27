@@ -5,7 +5,7 @@ import { ease, spring } from '../../lib/motion.js';
 const NAV = [
   { key: 'dash', label: 'Dashboard', enabled: true },
   { key: 'pre', label: 'Pre-Booking', enabled: true },
-  { key: 'post', label: 'Post-Booking', badge: 'Next', message: 'Post-Booking screens are built next.' },
+  { key: 'post', label: 'Post-Booking', enabled: true },
   { key: 'acc', label: 'Accounts' },
   { key: 'doc', label: 'Documents' },
   { key: 'hr', label: 'HR' },

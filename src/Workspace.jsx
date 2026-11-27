@@ -8,6 +8,7 @@ import Dashboard from './features/dashboard/Dashboard.jsx';
 import PreBookingList from './features/prebooking/PreBookingList.jsx';
 import BookingDetail from './features/prebooking/BookingDetail.jsx';
 import NewPreBooking from './features/prebooking/new/NewPreBooking.jsx';
+import PostBooking from './features/postbooking/PostBooking.jsx';
 import { useTransientState } from './hooks/useTimers.js';
 import { fadeIn } from './lib/motion.js';
 
@@ -76,6 +77,8 @@ export default function Workspace({ store, onSignOut }) {
           <motion.main key={view} {...fadeIn} className="p-4 sm:p-6 max-w-[1400px]">
             {view === 'dash' ? (
               <Dashboard {...pageProps} onNavigate={go} />
+            ) : view === 'post' ? (
+              <PostBooking store={store} say={say} />
             ) : (
               <PreBookingList {...pageProps} filter={filter} onFilter={setFilter} highlightId={highlightId} />
             )}

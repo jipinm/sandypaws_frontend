@@ -7,7 +7,7 @@ export default function PageHeader({ title, subtitle, onNew }) {
         <h1 className="text-2xl font-bold">{title}</h1>
         <p className="text-sm text-mute">{subtitle}</p>
       </div>
-      <Button primary onClick={onNew}>+ New Pre-Booking</Button>
+      {onNew && <Button primary onClick={onNew}>+ New Pre-Booking</Button>}
     </div>
   );
 }
